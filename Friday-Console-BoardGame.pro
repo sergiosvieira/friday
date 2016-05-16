@@ -15,5 +15,6 @@ HEADERS += \
     hazard_card.h \
     card.h \
     hazard_robinson_card.h \
-    friday.h
+    friday.h \
+    locale_eng.h
 

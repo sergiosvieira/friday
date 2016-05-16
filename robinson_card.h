@@ -15,19 +15,21 @@ public:
                                            m_lifePointDestroy{a_lifePointDestroy}{};
     RobinsonCard(const std::string& a_title,
                  int a_fightingValue,
+                 int a_lifePointDestroy,
                  Aging a_aging,
                  AgingAbility a_agingAbility): Card{a_title},
                                                m_fightingValue{a_fightingValue},
+                                               m_lifePointDestroy{a_lifePointDestroy},
                                                m_aging{a_aging},
                                                m_agingAbility{a_agingAbility}{};
     int fightingValue() const;
     void fightingValue(int fightingValue);
 protected:
     int m_fightingValue = 0;
-    SpecialAbility m_ability = SA_NONE;
+    SpecialAbility m_ability = SpecialAbility::NONE;
     int m_lifePointDestroy = 1;
-    Aging m_aging = A_NONE;
-    AgingAbility m_agingAbility = AA_NONE;
+    Aging m_aging = Aging::NONE;
+    AgingAbility m_agingAbility = AgingAbility::NONE;
 };
 
 #endif // ROBINSONCARD_H

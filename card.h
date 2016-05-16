@@ -3,9 +3,9 @@
 
 #include <string>
 
-using SpecialAbility = enum
+enum class SpecialAbility
 {
-    SA_NONE,
+    NONE,
     PLUS_ONE_LIFE,
     PLUS_TWO_LIFE,
     PLUS_ONE_CARD,
@@ -14,22 +14,23 @@ using SpecialAbility = enum
     ONE_DOUBLE,
     ONE_COPY,
     STEP_MINUS_ONE,
+    PHASE_MINUS_ONE,
     SORT_THREE_CARDS,
     ONE_EXCHANGE,
     TWO_EXCHANGE,
     ONE_BELOW_THE_STACK
 };
 
-using Aging = enum
+enum class Aging
 {
-    A_NONE,
+    NONE,
     NORMAL,
     DIFFICULT
 };
 
-using AgingAbility = enum
+enum class AgingAbility
 {
-    AA_NONE,
+    NONE,
     MINUS_ONE_LIFE,
     MINUS_TWO_LIFE,
     HIGHEST_CARD_EQUAL_ZERO,
