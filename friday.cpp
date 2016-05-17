@@ -2,6 +2,8 @@
 
 #include <algorithm>
 #include "locale_eng.h"
+#include "input.h"
+#include "output.h"
 
 std::vector<RobinsonCard> Friday::m_agingCards =
 {
@@ -130,10 +132,12 @@ void Friday::run()
     {
         if (m_hazardDeck.size() > 1)
         {
-            HazardRobinsonCard* first = m_hazardDeck.pop();
-            HazardRobinsonCard* second = m_hazardDeck.pop();
+            HazardRobinsonCard* first = m_hazardDeck.top();
+            m_hazardDeck.pop();
+            HazardRobinsonCard* second = m_hazardDeck.top();
+            m_hazardDeck.pop();
             Output::showHazard(first, second);
-            HazardRobinsonCard* choosen = Input::chooseHazard(first, second);
+            HazardRobinsonCard* choosen = Input::chooseCard(first, second);
             if (choosen == first)
             {
                 m_hazardDiscardDeck.push(second);
@@ -159,17 +163,31 @@ void Friday::run()
             int total = 0;
             for (int i = 0; i < freeCards; ++i)
             {
-                RobinsonCard* card = m_robinsonDeck.pop();
+                RobinsonCard* card = m_robinsonDeck.top();
+                m_robinsonDeck.pop();
                 total += card->fightingValue();
                 m_gameArea.push_back(card);
                 Output::showRobinsonCard(card);
             }
-            bool done = Input::continue();
+            bool done = Input::doContinue();
             while (!done)
             {
                 if (m_life > 0)
                 {
                     --m_life;
+                    Output::decrementLife();
+                    if (m_robinsonDeck.size() > 0)
+                    {
+                        RobinsonCard* card = m_robinsonDeck.top();
+                        m_robinsonDeck.pop();
+                        total += card->fightingValue();
+                        m_gameArea.push_back(card);
+                        Output::showRobinsonCard(card);
+                    }
+                    else
+                    {
+
+                    }
                 }
                 else
                 {
@@ -177,7 +195,12 @@ void Friday::run()
                     done = true;
                     break;
                 }
-                done = Input::continue();
+                done = Input::doContinue();
+            }
+            if (Input::wantDestroyCards())
+            {
+                Input::chooseCardsToDestroy(m_gameArea);
+                Output::destroyCards(m_gameArea);
             }
         }
         else

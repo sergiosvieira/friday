@@ -16,10 +16,7 @@ enum class Level
 class Friday
 {
 public:    
-    Friday()
-    {
-        initialize();
-    };
+    Friday();
     void run();
 protected:    
     int m_reserveLife = 2;
