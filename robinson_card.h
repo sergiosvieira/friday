@@ -1,6 +1,7 @@
 #ifndef ROBINSONCARD_H
 #define ROBINSONCARD_H
 
+#include <ostream>
 #include "card.h"
 
 class RobinsonCard : public Card
@@ -24,6 +25,14 @@ public:
                                                m_agingAbility{a_agingAbility}{};
     int fightingValue() const;
     void fightingValue(int fightingValue);
+    friend std::ostream& operator<<(std::ostream &os, const RobinsonCard& card)
+    {
+        return os << "Robinson [\n"
+                  //<< "\tTitle: " << card.title()
+                  << "\tFighting Value: " << card.fightingValue()
+                  << "]\n";
+    }
+
 protected:
     int m_fightingValue = 0;
     SpecialAbility m_ability = SpecialAbility::NONE;

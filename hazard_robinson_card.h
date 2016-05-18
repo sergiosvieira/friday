@@ -1,6 +1,8 @@
 #ifndef HAZARDROBINSONCARD_H
 #define HAZARDROBINSONCARD_H
 
+#include <iostream>
+#include <ostream>
 #include "robinson_card.h"
 #include "hazard_card.h"
 
@@ -17,6 +19,17 @@ public:
     {
         return m_hazard;
     }
+    friend std::ostream & operator<<(std::ostream &os, const HazardRobinsonCard& card)
+    {
+        return os << "Hazard\n["
+                  << "\n\tTitle:" << card.hazardCard().title()
+                  << "\n\tFree Cards:" << card.hazardCard().freeCards()
+                  << "\n\tGreen Hazard:" << card.hazardCard().greenHazard()
+                  << "\n\tYellow Hazard:" << card.hazardCard().yellowHazard()
+                  << "\n\tRed Hazard:" << card.hazardCard().redHazard()
+                  << "\n]";
+    }
+
 protected:
     RobinsonCard& m_robinson;
     HazardCard& m_hazard;
