@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <ostream>
+#include <utility>
+#include <algorithm>
 #include "robinson_card.h"
 #include "hazard_card.h"
 
@@ -28,6 +30,12 @@ public:
                   << "\n\tYellow Hazard:" << card.hazardCard().yellowHazard()
                   << "\n\tRed Hazard:" << card.hazardCard().redHazard()
                   << "\n]";
+    }
+    HazardRobinsonCard& operator=(const HazardRobinsonCard& other)
+    {
+        m_robinson = other.robinsonCard();
+        m_hazard = other.hazardCard();
+        return *this;
     }
 
 protected:

@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 2.6)
+project(Friday)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++0x")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
+file(GLOB SOURCES "*.cpp")
+add_executable(friday ${SOURCES})

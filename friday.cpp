@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <algorithm>
+#include <random>
 #include "locale_eng.h"
 #include "input.h"
 #include "output.h"
@@ -223,7 +224,7 @@ void Friday::initialize()
 
 void Friday::initHazardDeck()
 {
-    //std::random_shuffle (m_hazardCards.begin(), m_hazardCards.end());
+    std::random_shuffle (m_haza rdCards.begin(), m_hazardCards.end());
     for (auto row: m_hazardCards)
     {
         m_hazardDeck.push(&row);
@@ -232,7 +233,11 @@ void Friday::initHazardDeck()
 
 void Friday::initRobinsonDeck()
 {
-    std::random_shuffle (m_startingCards.begin(), m_startingCards.end());
+    //std::random_shuffle (m_startingCards.begin(), m_startingCards.end());
+    std::vector<RobinsonCard> aux(m_startingCards);
+    std::random_device rng;
+    std::mt19937 urng(rng());
+    std::shuffle(m_startingCards.begin(), m_startingCards.end(), urng);
     for (auto row: m_startingCards)
     {
         m_robinsonDeck.push(&row);
@@ -241,7 +246,7 @@ void Friday::initRobinsonDeck()
 
 void Friday::initAgingNormalDeck()
 {
-    //std::random_shuffle (m_agingCards.begin() + 3, m_agingCards.begin() + 9);
+    std::random_shuffle (m_agingCards.begin() + 3, m_agingCards.begin() + 9);
     for (int i = 3; i < 10; ++i)
     {
         m_agingNormalDeck.push(&m_agingCards[i]);
